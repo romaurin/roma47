@@ -1,0 +1,102 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1a1a1a, #4a0000);
+    color: #fff;
+    text-align: center;
+    overflow-x: hidden;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+h1 {
+    font-size: 2.8em;
+    animation: typing 2s steps(30, end), blink-caret 0.5s step-end infinite;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0.15em solid #ff0000;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+.rocket {
+    display: inline-block;
+    animation: rocketPink rocket 1.2s ease-in-out infinite;
+}
+.intro {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin: 20px 0;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+.features, .portfolio, .pricing {
+    margin: 50px 0;
+}
+h2 {
+    font-size: 2.2em;
+    color: #ff0000;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    animation: glow 1.5s ease-in-out infinite;
+}
+.feature-grid, .portfolio-grid, .pricing-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.feature-card, .portfolio-card, .pricing-card {
+    background: rgba(255, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    border-radius: 12px;
+    border: 1px solid #ff0000;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 250px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+}
+.feature-card:hover, .portfolio-card:hover, .pricing-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+}
+.feature-card h3, .portfolio-card h3, .pricing-card h3 {
+    color: #ff0000;
+    margin: 10px 0;
+}
+.telegram-button {
+    display: inline-block;
+    padding: 15px 30px;
+    background: #ff0000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    animation: pulse 1.2s infinite;
+    margin: 20px 0;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+}
+.telegram-button:hover {
+    background: #cc0000;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+}
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #ff0000; }
+}
+@keyframes rocket {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(8deg); }
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
+    50% { text-shadow: 0 0 15px rgba(255, 0, 0, 0.8); }
+}

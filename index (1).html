@@ -1,0 +1,116 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Рома, 16 лет, создаёт крутые сайты и Telegram-боты в Казахстане. Дёшево, быстро, стильно — закажи прямо сейчас!">
+    <title>Рома — Крутые сайты и боты</title>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Крутые сайты и боты от Ромы! <span class="rocket">🔥</span></h1>
+        <p class="intro">Привет, я Рома, и я делаю <strong>лёгкие сайты</strong> и <strong>Telegram-боты</strong>, которые выглядят круто и стоят недорого! <br> Хочешь свой сайт для портфолио, блога или бота для чата? Я сделаю это <strong>быстро</strong>, <strong>просто</strong> и <strong>по карману</strong>. <br> Пиши, и твой проект оживёт за день!</p>
+        
+        <div class="features" data-aos="fade-up">
+            <h2>Почему я?</h2>
+            <div class="feature-grid">
+                <div class="feature-card" data-aos="fade-right">
+                    <h3>⚡ Супербыстро</h3>
+                    <p>Готово за 1-2 дня!</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up">
+                    <h3>💡 Крутой стиль</h3>
+                    <p>Дизайн, который цепляет всех.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-left">
+                    <h3>💸 Дёшево</h3>
+                    <p>Цены для студентов и начинающих.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="portfolio" data-aos="zoom-in">
+            <h2>Мои проекты</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <h3>Сайт для блога</h3>
+                    <p>Лёгкий сайт для личного бренда.</p>
+                </div>
+                <div class="portfolio-card">
+                    <h3>Telegram-бот</h3>
+                    <p>Бот для чата с мемами.</p>
+                </div>
+                <div class="portfolio-card">
+                    <h3>Портфолио фрилансера</h3>
+                    <p>Сайт для дизайнера.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="pricing" data-aos="fade-up">
+            <h2>Цены в Казахстане</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Лёгкий сайт</h3>
+                    <p>Лендинг — от 10,000 ₸</p>
+                </div>
+                <div class="pricing-card">
+                    <h3>Telegram-бот</h3>
+                    <p>Простой бот — от 5,000 ₸</p>
+                </div>
+                <div class="pricing-card">
+                    <h3>Кастом</h3>
+                    <p>От 15,000 ₸ за твою идею</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://t.me/Romaywi" class="telegram-button" data-aos="zoom-in">📱 Пиши в Telegram!</a>
+        <p>Один чат — и твой проект готов!</p>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
